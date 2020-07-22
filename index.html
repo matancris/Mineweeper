@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Minesweeper</title>
+</head>
+
+<body onload="init()">
+
+    <H1>Minesweeper</H1>
+    <div class="timer"></div>
+    
+    <div class="level">
+        <select name="dificulty" class="dificulty" onchange="selectLevel()">
+            <option value="Begginer">Begginer</option>
+            <option value="Medium">Medium</option>
+            <option value="Expert">Expert</option>
+        </select>
+        
+        <div class="timer"></div>
+</div>
+<button class="smiley" onclick="init();">😀</button>
+
+<div class="board">
+</div>
+
+
+    <script src="js/util.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
