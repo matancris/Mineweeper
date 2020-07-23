@@ -167,6 +167,7 @@ function cellClicked(elCell, i, j) {
 
     if (gIsFirstClick) {
         startTimer();
+        renderModal('start');
         //this "if" happens if the first click is on a mine
         if (gBoard[i][j].isMine) {
             var currCell = { i, j };
@@ -402,10 +403,14 @@ function renderModal(status) {
             break;
         case 'lost life':
             elModal.innerText = (gLivesNum == 1) ? `${gLivesNum} life remain!` : `${gLivesNum} lives remain!`;
-            setTimeout(closeModal, 4000);
+            setTimeout(closeModal, 3000);
             break;
          case 'manual':
             elModal.innerText = `Place ${gLevel.MINES}\n mines`;
+            break;
+         case 'start':
+            elModal.innerText =`Go for it!`;
+            setTimeout(closeModal, 3000);
             break;
     }
 }
