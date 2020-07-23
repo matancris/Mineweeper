@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Minesweeper</title>
+</head>
+
+<body onload="init()">
+
+    <H1>Minesweeper</H1>
+    <div class="timer"></div>
+    <div class= "modal"></div>
+
+    <div class="level">
+        <select name="dificulty" class="dificulty" onchange="selectLevel()">
+            <option value="Begginer">Begginer</option>
+            <option value="Medium">Medium</option>
+            <option value="Expert">Expert</option>
+        </select>
+
+    </div>
+    <div class="life"></div>
+
+    <button class="smiley" onclick="init();">😀</button>
+
+    <div class="hint"></div>
+
+
+    <div class="board">
+    </div>
+
+    <button class="manual" onclick="setManualMode(this)">Manual positioning</button>
+
+    <script src="js/util.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
