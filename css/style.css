@@ -7,9 +7,7 @@ body {
   background-attachment: fixed;
   color: #DDDDDD;
   text-align: center;
-
-
-   /* disable text selection */
+  /* disable text selection */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -38,7 +36,6 @@ select {
   display: inline;
   margin: 0;
   padding: 0;
-  
 }
 
 .hint {
@@ -71,8 +68,6 @@ button {
   font-weight: 100;
 }
 
-
-
 table {
   margin: 0 auto;
   /* disable text selection so the user can't see what is hidden behind the td's */
@@ -87,7 +82,6 @@ table {
 .board {
   margin-left: auto;
   margin-right: auto;
-  
 }
 
 .board td {
@@ -141,11 +135,12 @@ table {
   font-family: 'Courier New', Courier, monospace;
   /* made with css generator */
   color: #FFFFFF;
-  background:  #22445f;;
+  background: #22445f;
+  ;
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
 }
 
-.modal{
+.modal {
   position: fixed;
   top: 20px;
   left: 20px;
@@ -163,57 +158,36 @@ table {
   box-shadow: 10px 10px 15px #625db6;
   visibility: hidden;
   font-family: 'Courier New', Courier, monospace;
-
   /* made with css generator */
   color: #FFFFFF;
   background: #22445f;
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
 }
 
-
-
-
-
 /* MODAL */
 
-
-@keyframes myAnimation{
-
-  0%{
+@keyframes myAnimation {
+  0% {
     opacity: 0;
     transform: rotateX(90deg);
   }
-
-20%{
-  opacity: 0.2;
-
-}
-
-40%{
-  opacity: 0.4;
-  
-}
-  60%{
-    opacity: 0.6;
-
+  25% {
+    opacity: 0.25;
   }
-80%{
-  opacity: 0.8;
-
-}
-  100%{
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
     /* display: none; */
     opacity: 1;
   }
-
-  50%{
-    opacity: 0.6
-  }
 }
 
-.animated{
-    animation-name: myAnimation;
-    animation-duration: 2000ms;
-    animation-fill-mode: forwards;
+.animated {
+  animation-name: myAnimation;
+  animation-duration: 2000ms;
+  animation-fill-mode: forwards;
 }
-
