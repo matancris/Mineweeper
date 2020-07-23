@@ -1,123 +1,219 @@
 body {
-    background-image: url("/img/background-mine.jpg");
-    background-position: center;
-    background-size: auto ;
-    background-repeat: no-repeat;
-
-    color: #DDDDDD;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-  }
-  
-  h1 {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  select {
-    display: inline;
-    font-family:'Courier New', Courier, monospace;
-    background-color: #4f4e81;
-    color: #DDDDDD;
-    font-size: 15px;
-    font-weight: bold;
-    
+  zoom: 170%;
+  background-image: url("img/background-mine.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #DDDDDD;
+  text-align: center;
 
 
-  }
-
-  button {
-     margin: 12px;
-     font-size: 22px;
-     background-color: lightblue;
-
-     color: #FFFFFF;
-background: #232323;
-text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
-     
-  }
-
-  table{
-    margin: 0 auto;
-    /* disable text selection so the user can't see what is hidden behind the td's */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-
-    border-collapse: separate;
-    border-spacing: 1px
-
-  }
- 
-  
-  .board {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .board td{
-   
-    border:2px solid rgb(185, 184, 233);
-    background: #4f4e81;
-    width: 22px;
-    height: 22px;
-    text-align: center;
-    color: transparent;
-    cursor: pointer;
-    object-fit: cover;
-
-   
-  }
-  .board td:hover{
-    background-color:#625db6 ;
-   
-  }
-  
-  .board td.clicked {
-      transition: 0.3s;
-      background: #333333;
-      color: currentColor ;
-  }
-  
-  .board td.mine {
-      background: #FF0000;
-      color: currentColor ;
-  }
-
-  .board td.marked{
-    transition: 0.5s;
-    background-color: rgb(21, 114, 114);
-    color: currentColor ;
-
-
-  }
-  
-
-  .timer {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 200px;
-    height: 80px;
-    background-color: rgb(79, 212, 157);
-    margin: 15px auto;
-    color: rgb(20, 110, 73);
-    border-radius: 30%;
-    text-align: center;
-    line-height: 40px;
-    font-size: 25px;
-    font-weight: bold;
-    box-shadow: 5px 5px 10px #625db6;
-    visibility: hidden;
-
-
-    /* made with css generator */
-    color: #FFFFFF;
-    background: #232323;
-    text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+   /* disable text selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
+h1 {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+select {
+  display: inline;
+  outline: none;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #4f4e81;
+  color: #DDDDDD;
+  font-size: 15px;
+  font-weight: bold;
+  list-style: square;
+}
+
+.hint>*, .life>* {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.hint {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.lighted {
+  transition: 0.5s;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+}
+
+button {
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+  margin: 12px;
+  font-size: 22px;
+  background-color: lightblue;
+  outline: none;
+  color: #FFFFFF;
+  background: #232323;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+}
+
+.life {
+  display: inline;
+  margin: 0;
+  margin-left: -4px;
+  padding: 0;
+  font-weight: 100;
+}
+
+
+
+table {
+  margin: 0 auto;
+  /* disable text selection so the user can't see what is hidden behind the td's */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-collapse: separate;
+  border-spacing: 1px;
+}
+
+.board {
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.board td {
+  border: 2px solid rgb(185, 184, 233);
+  background: #4f4e81;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  color: transparent;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.board td:hover {
+  background-color: #625db6;
+}
+
+.board td.clicked {
+  transition: 0.3s;
+  background: #333333;
+  color: currentColor;
+}
+
+.board td.mine {
+  background: #FF0000;
+  color: currentColor;
+}
+
+.board td.marked {
+  transition: 0.5s;
+  background-color: rgb(21, 114, 114);
+  color: currentColor;
+}
+
+.timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 200px;
+  height: 80px;
+  background-color: rgb(79, 212, 157);
+  margin: 15px auto;
+  color: rgb(20, 110, 73);
+  border-radius: 30%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 25px;
+  font-weight: bold;
+  box-shadow: 10px 10px 15px #625db6;
+  visibility: hidden;
+  font-family: 'Courier New', Courier, monospace;
+  /* made with css generator */
+  color: #FFFFFF;
+  background:  #22445f;;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+}
+
+.modal{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 200px;
+  height: 80px;
+  max-height: 100px;
+  background-color: rgb(79, 212, 157);
+  margin: 15px auto;
+  color: rgb(20, 110, 73);
+  border-radius: 30%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 25px;
+  font-weight: bold;
+  box-shadow: 10px 10px 15px #625db6;
+  visibility: hidden;
+  font-family: 'Courier New', Courier, monospace;
+
+  /* made with css generator */
+  color: #FFFFFF;
+  background: #22445f;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+}
+
+
+
+
+
+/* MODAL */
+
+
+@keyframes myAnimation{
+
+  0%{
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
+
+20%{
+  opacity: 0.2;
+
+}
+
+40%{
+  opacity: 0.4;
+  
+}
+  60%{
+    opacity: 0.6;
+
+  }
+80%{
+  opacity: 0.8;
+
+}
+  100%{
+    /* display: none; */
+    opacity: 1;
+  }
+
+  50%{
+    opacity: 0.6
+  }
+}
+
+.animated{
+    animation-name: myAnimation;
+    animation-duration: 2000ms;
+    animation-fill-mode: forwards;
+}
 
