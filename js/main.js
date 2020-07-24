@@ -14,6 +14,8 @@ var gLevel = {
 var gIsFirstClick = true; //using it to check if the user started the game to activate the timer.
 var gIntervalTimer;
 var gStartTime;
+var gLastScore; // every clearInterval cheks the last printed time
+
 
 // Hints vars
 var gHints = [];
@@ -26,6 +28,9 @@ var gLivesNum = 3;
 // Manual mode vars
 var gIsManual = false;
 var gManualCounter = 0;
+
+// Safe mode vars
+var gClickModeCounter = 3;
 
 
 function selectLevel() {
@@ -48,23 +53,29 @@ function selectLevel() {
 }
 
 function restartGame() {
-    //DOM restart
-    var elSmiley = document.querySelector('.smiley')
-    elSmiley.innerText = '😀';
-    var elManual = document.querySelector('.manual')
-    elManual.innerText = 'Manual positioning'
-    closeModal();
-    
+
     // Timer restart
     var elTimer = document.querySelector('.timer');
     elTimer.style.visibility = 'hidden';
     gStartTime = 0;
     gIntervalTimer = 0
+    gLastScore = undefined; // all the other options didn't work. number > null => true.
 
     gIsFirstClick = true;
     gHintCounter = 0;
     gLivesNum = 3;
     gManualCounter = 0;
+    gClickModeCounter = 3;
+
+    //DOM restart
+    var elSafeBtn = document.querySelector('.safe-btn')
+    elSafeBtn.innerText = `${gClickModeCounter} safe clicks`;
+    var elSmiley = document.querySelector('.smiley')
+    elSmiley.innerText = '😀';
+    var elManual = document.querySelector('.manual')
+    elManual.innerText = 'Manual positioning';
+    checkBestScore()
+    closeModal();
 }
 
 function init() {
@@ -278,13 +289,15 @@ function checkGameOver() {
 
 function gameOver(isWin) {
     clearInterval(gIntervalTimer);
+    console.log(gLastScore);
     var elSmiley = document.querySelector('.smiley')
     if (!isWin) {
         elSmiley.innerText = '🤕';
         renderModal('lose')
     } else if (isWin) {
         elSmiley.innerText = '🥳';
-        renderModal('win')
+        renderModal('win');
+        checkBestScore()
     }
 }
 
@@ -303,6 +316,7 @@ function setTimer() {
     var printedTime = diffTime.getMinutes() + ':' + diffTime.getSeconds();
     var elTimer = document.querySelector('.timer');
     elTimer.innerText = 'Timer:\n' + printedTime;
+    gLastScore = (diffTime.getMinutes() * 60) + diffTime.getSeconds();
 }
 
 
@@ -381,7 +395,6 @@ function renderLives() {
         strHTML += `<div class="life${i} lighted">❤️</div>`;
     }
     var elLife = document.querySelector('.life');
-    console.log(elLife);
     elLife.innerHTML = strHTML;
 }
 
@@ -405,11 +418,11 @@ function renderModal(status) {
             elModal.innerText = (gLivesNum == 1) ? `${gLivesNum} life remain!` : `${gLivesNum} lives remain!`;
             setTimeout(closeModal, 3000);
             break;
-         case 'manual':
+        case 'manual':
             elModal.innerText = `Place ${gLevel.MINES}\n mines`;
             break;
-         case 'start':
-            elModal.innerText =`Go for it!`;
+        case 'start':
+            elModal.innerText = `Go for it!`;
             setTimeout(closeModal, 3000);
             break;
     }
@@ -452,6 +465,80 @@ function setManualMode(elCell) {
         renderBoard(gBoard)
     }
 }
+
+// SAFE MODE ZONE
+
+function setSafeClick(elBtn) {
+    var isFound = false;
+
+    while (!isFound && gClickModeCounter > 0) {
+        var randomRow = getRandomInt(0, gLevel.SIZE);
+        var randomCol = getRandomInt(0, gLevel.SIZE);
+        var cell = gBoard[randomRow][randomCol];
+        if (cell.isShown || cell.isMine || cell.isMarked) continue;
+        else {
+            var elCell = document.querySelector(`.cell${randomRow}-${randomCol}`);
+            elCell.classList.add('safe')
+            isFound = true;
+            gClickModeCounter--
+            setTimeout(closeSafeClick, 2000, randomRow, randomCol);
+        }
+    }
+    elBtn.innerText = `${gClickModeCounter} safe clicks`;
+}
+
+function closeSafeClick(i, j) {
+    var elCell = document.querySelector(`.cell${i}-${j}`);
+    elCell.classList.remove('safe');
+}
+
+
+// BEST SCORE (LOCAL STORAGE) ZONE
+
+
+function checkBestScore() {
+    // for clearing the local storage:
+    // localStorage.clear()
+
+    if (gLevel.SIZE === 4) {
+        setBestScoreByLevel(1)
+    }
+    else if (gLevel.SIZE === 8) {
+        setBestScoreByLevel(2)
+    }
+    else if (gLevel.SIZE === 12) {
+        setBestScoreByLevel(3)
+    }
+}
+
+function setBestScoreByLevel(level) {
+
+    var elScore = document.querySelector('.score');
+    var bestScore = localStorage[`highest ${level}`];
+    // first time the user playes
+    if (!bestScore && !gLastScore) {
+        elScore.innerText = 'Here your best score will be!'
+    }
+    // after getting the first score
+    else if (!bestScore && gLastScore) {
+        localStorage.setItem(`highest ${level}`, gLastScore);
+        bestScore = localStorage[`highest ${level}`]
+        elScore.innerText = `Your best score: ${bestScore} seconds!`
+
+    }
+    // when achieving better score (less time than the best score);
+    else if (bestScore > gLastScore) {
+        bestScore = gLastScore;
+        elScore.innerText = `Your best score: ${bestScore} seconds!`
+    }
+    // when the best score is still better than or equal to the current achievment
+    else {
+
+        elScore.innerText = `Your best score: ${bestScore} seconds!`
+    }
+
+}
+
 
 
 

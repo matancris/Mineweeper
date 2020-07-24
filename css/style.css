@@ -60,12 +60,35 @@ button {
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
 }
 
+button.bottom {
+  font-size: 20px;
+  text-overflow: clip;
+}
+
 .life {
   display: inline;
   margin: 0;
   margin-left: -4px;
   padding: 0;
   font-weight: 100;
+}
+
+.score {
+  font-family: Courier, monospace;
+  color: white;
+  display: inline-block;
+  position: relative;
+  width: 50%;
+  margin-top: 10px;
+  /* top: 140px;
+  left: 600px; */
+  border-radius: 30%;
+  background-color: #49b9ac99;
+  font-weight: bold;
+  color: white;
+
+  text-shadow: 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+
 }
 
 table {
@@ -117,6 +140,7 @@ table {
 }
 
 .timer {
+  display: inline-block;
   position: fixed;
   top: 20px;
   right: 20px;
@@ -136,11 +160,11 @@ table {
   /* made with css generator */
   color: #FFFFFF;
   background: #22445f;
-  ;
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
 }
 
 .modal {
+  display: inline-block;
   position: fixed;
   top: 20px;
   left: 20px;
@@ -164,6 +188,11 @@ table {
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
 }
 
+.safe {
+  transition: 0.7s;
+  box-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+}
+
 /* MODAL */
 
 @keyframes myAnimation {
@@ -171,17 +200,10 @@ table {
     opacity: 0;
     transform: rotateX(90deg);
   }
-  25% {
-    opacity: 0.25;
-  }
   50% {
     opacity: 0.5;
   }
-  75% {
-    opacity: 0.75;
-  }
   100% {
-    /* display: none; */
     opacity: 1;
   }
 }

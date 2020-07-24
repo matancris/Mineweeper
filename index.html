@@ -12,7 +12,7 @@
 
     <H1>Minesweeper</H1>
     <div class="timer"></div>
-    <div class= "modal"></div>
+    <div class="modal"></div>
 
     <div class="level">
         <select name="dificulty" class="dificulty" onchange="selectLevel()">
@@ -28,11 +28,13 @@
 
     <div class="hint"></div>
 
-
+    
     <div class="board">
     </div>
-
-    <button class="manual" onclick="setManualMode(this)">Manual positioning</button>
+    <div class="score"></div>
+<br>
+    <button class="bottom manual" onclick="setManualMode(this)">Manual positioning</button>
+    <button class="bottom safe-btn" onclick="setSafeClick(this)">Safe click</button>
 
     <script src="js/util.js"></script>
     <script src="js/main.js"></script>
