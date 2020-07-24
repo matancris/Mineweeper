@@ -289,7 +289,6 @@ function checkGameOver() {
 
 function gameOver(isWin) {
     clearInterval(gIntervalTimer);
-    console.log(gLastScore);
     var elSmiley = document.querySelector('.smiley')
     if (!isWin) {
         elSmiley.innerText = '🤕';
@@ -528,7 +527,8 @@ function setBestScoreByLevel(level) {
     }
     // when achieving better score (less time than the best score);
     else if (bestScore > gLastScore) {
-        bestScore = gLastScore;
+        localStorage[`highest ${level}`] = gLastScore;
+        bestScore = localStorage[`highest ${level}`]; // not working if not directly put in the local storage. not by reference?
         elScore.innerText = `Your best score: ${bestScore} seconds!`
     }
     // when the best score is still better than or equal to the current achievment
